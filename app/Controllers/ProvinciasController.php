@@ -3,6 +3,8 @@
 namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\ProvinciaModel;
+use App\Models\RoleModel;
+
 
 
 class ProvinciasController extends BaseController

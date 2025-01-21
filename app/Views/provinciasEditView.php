@@ -23,4 +23,5 @@ $errors=validation_errors();
         
          </div>
 </div>
+
 <?php include("templates/parte2.php");?>
