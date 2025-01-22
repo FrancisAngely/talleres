@@ -569,6 +569,15 @@
                         </ul>
                     </li>
 
+                    <li class="has-submenu">
+                        <a href="#"> <i class="mdi mdi-flip-horizontal"></i>Modelos</a>
+                        <ul class="submenu">
+                        <li><a href="<?php echo baseUrl(); ?>/modelos">Listado</a></li>
+                        <li><a href="<?php echo baseUrl(); ?>/modelos/nuevo">Nuevo</a></li>
+
+                        </ul>
+                    </li>
+
 
                 </ul>
                 <!-- End navigation menu -->

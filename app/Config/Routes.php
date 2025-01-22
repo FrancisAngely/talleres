@@ -70,12 +70,10 @@ $routes->match( ['get','post'],'/distribuidores/editar', 'DistribuidoresControll
 $routes->match( ['get','post'],'/distribuidores/actualizar', 'DistribuidoresController::actualizar');
 $routes->match( ['get','post'],'/distribuidores/eliminar', 'DistribuidoresController::delete');
 
-// //INMUEBLES USO
-// $routes->get('/inmuebles_usos', 'Inmuebles_usosController::index');
-// $routes->get('/inmuebles_usos/nuevo', 'Inmuebles_usosController::nuevo');
-// $routes->match( ['get','post'],'/inmuebles_usos/crear', 'Inmuebles_usosController::crear');
-// $routes->match( ['get','post'],'/inmuebles_usos/editar', 'Inmuebles_usosController::editar');
-// $routes->match( ['get','post'],'/inmuebles_usos/actualizar', 'Inmuebles_usosController::actualizar');
-// $routes->match( ['get','post'],'/inmuebles_usos/eliminar', 'Inmuebles_usosController::delete');
-// $routes->match( ['get','post'],'/inmuebles_usos/exportar', 'Inmuebles_usosController::exportar');
-// $routes->match( ['get','post'],'/inmuebles_usos/imprimir', 'Inmuebles_usosController::imprimir');
+//MODELOS
+$routes->get('/modelos', 'ModelosController::index');
+$routes->get('/modelos/nuevo', 'ModelosController::nuevo');
+$routes->match( ['get','post'],'/modelos/crear', 'ModelosController::crear');
+$routes->match( ['get','post'],'/modelos/editar', 'ModelosController::editar');
+$routes->match( ['get','post'],'/modelos/actualizar', 'ModelosController::actualizar');
+$routes->match( ['get','post'],'/modelos/eliminar', 'ModelosController::delete');

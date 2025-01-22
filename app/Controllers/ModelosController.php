@@ -15,54 +15,52 @@ class ModelosController extends BaseController
     public function index()
     {
         $model = new ModelosModel();
-        $data['distribuidores'] = $model->findAll();
+        $data['modelos'] = $model->findAll();
 
-        return view('distribuidoresListView', $data);
+        return view('modelosListView', $data);
     }
 
     public function nuevo()
     {
 
-        return view('distribuidoresNewView');
+        return view('modelosNewView');
     }
 
 
     public function crear()
     {
-
         $rules = [
-            'razon_social' => [
-                'rules' => 'required|is_unique[distribuidores.razon_social]',
+            'modelo' => [
+                'rules' => 'required|is_unique[modelos.modelo]',
                 'errors' => [
-                    'required' => 'Debes introducir una razon social',
-                    'is_unique' => 'La razon social ya existe',
+                    'required' => 'Debes introducir un modelo',
+                    'is_unique' => 'La modelo ya existe',
 
                 ]
             ],
-            'nombre' => [
-                'rules' => 'required|is_unique[distribuidores.nombre]',
+            'descripcion' => [
+                'rules' => 'required|is_unique[modelos.descripcion]',
                 'errors' => [
-                    'required' => 'Debes introducir un nombre',
-                    'is_unique' => 'El nombre ya existe',
+                    'required' => 'Debes introducir una descripcion',
+                    'is_unique' => 'La descripcion ya existe',
 
                 ]
             ],
-            'apellidos' => [
-                'rules' => 'required|is_unique[distribuidores.apellidos]',
+            'precio' => [
+                'rules' => 'required|is_unique[modelos.precio]',
                 'errors' => [
-                    'required' => 'Debes introducir un apellido',
-                    'is_unique' => 'Los apellidos ya existe',
+                    'required' => 'Debes introducir un precio',
+                    'is_unique' => 'El precio ya existe',
 
                 ]
             ],
-            'cif_nif_nie' => [
-                'rules' => 'required|is_unique[distribuidores.cif_nif_nie]',
+            'foto' => [
+                'rules' => 'required|is_unique[modelos.foto]',
                 'errors' => [
-                    'required' => 'Debes introducir una CIF, NIF o NIE',
-                    'is_unique' => 'El CIF, NIF o NIE ya existe',
+                    'required' => 'Debes introducir una foto',
+                    'is_unique' => 'La foto ya existe',
                 ]
-           ]
-
+            ]
         ];
 
         $datos = $this->request->getPost(array_keys($rules));
@@ -72,25 +70,22 @@ class ModelosController extends BaseController
         }
 
         $model = new ModelosModel();
-        $razon_social = $this->request->getvar('razon_social');
-
-        $nombre = $this->request->getvar('nombre');
-
-        $apellidos = $this->request->getvar('apellidos');
-
-        $cif_nif_nie = $this->request->getvar('cif_nif_nie');
+        $modelo = $this->request->getvar('modelo');
+        $descripcion = $this->request->getvar('descripcion');
+        $precio = $this->request->getvar('precio');
+        $foto = $this->request->getvar('foto');
 
         $newData = [
-            'razon_social' => $razon_social,
-            'nombre' => $nombre,
-            'apellidos' => $apellidos,
-            'cif_nif_nie' => $cif_nif_nie
+            'modelo' => $modelo,
+            'descripcion' => $descripcion,
+            'precio' => $precio,
+            'foto' => $foto
         ];
 
         $model->save($newData);
 
 
-        return redirect()->to('/distribuidores');
+        return redirect()->to('/modelos');
     }
 
     public function editar()
@@ -100,43 +95,39 @@ class ModelosController extends BaseController
         $data["datos"] = $model->where('id', $id)->first();
 
 
-        return view('distribuidoresEditView', $data);
+        return view('modelosEditView', $data);
     }
 
     public function actualizar()
     {
-
         $rules = [
-            'razon_social' => [
+            'modelo' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'Debes introducir una razon social',
+                    'required' => 'Debes introducir un modelo',
 
                 ]
             ],
-            'nombre' => [
+            'descripcion' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'Debes introducir un nombre',
+                    'required' => 'Debes introducir una descripcion',
 
                 ]
             ],
-            'apellidos' => [
+            'precio' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'Debes introducir un apellido',
+                    'required' => 'Debes introducir un precio',
 
                 ]
             ],
-            'cif_nif_nie' => [
+            'foto' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'Debes introducir una CIF, NIF o NIE',
-
+                    'required' => 'Debes introducir una foto',
                 ]
-            ],
-
-
+            ]
         ];
 
         $datos = $this->request->getPost(array_keys($rules));
@@ -147,17 +138,16 @@ class ModelosController extends BaseController
 
         $model = new ModelosModel();
         $id = $this->request->getvar('id');
-        $razon_social = $this->request->getvar('razon_social');
-        $nombre = $this->request->getvar('nombre');
-        $apellidos = $this->request->getvar('apellidos');
-        $cif_nif_nie = $this->request->getvar('cif_nif_nie');
+        $modelo = $this->request->getvar('modelo');
+        $descripcion = $this->request->getvar('descripcion');
+        $precio = $this->request->getvar('precio');
+        $foto = $this->request->getvar('foto');
 
         $model->where('id', $id)
-        ->set(['razon_social'=>$razon_social,'nombre'=>$nombre,'apellidos'=>$apellidos,'cif_nif_nie'=>$cif_nif_nie,'updated_at'=>date("Y-m-d h:i:s")])
-        ->update();
+            ->set(['modelo' => $modelo, 'descripcion' => $descripcion, 'precio' => $precio, 'foto' => $foto, 'updated_at' => date("Y-m-d h:i:s")])
+            ->update();
 
-
-        return redirect()->to('/distribuidores');
+        return redirect()->to('/modelos');
     }
 
 
@@ -167,6 +157,6 @@ class ModelosController extends BaseController
         $id = $this->request->getvar('id');
 
         $model->where('id', $id)->delete();
-        return redirect()->to('/distribuidores');
+        return redirect()->to('/modelos');
     }
 }

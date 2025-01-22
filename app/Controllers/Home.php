@@ -7,8 +7,8 @@ class Home extends BaseController
 {
      protected $helpers=['form'];
 
-    // public function index()
-    // {
+     public function index()
+    {
     //      $model=new UsuarioModel();
     //      $usuarios=$model->datosgrafica();
     //      $data["datos"]=$usuarios;
@@ -58,8 +58,8 @@ class Home extends BaseController
     //     $data["datos"]=$yValues;
     //     $dataC["grafica4"]=view('graf_LineView',$data);
             
-    //         return view('inicio',$dataC);
-    // }
+             return view('inicio');
+     }
      public function inicio()
     {
         $data["mensaje"]="Hola,";
