@@ -36,14 +36,7 @@ $routes->match( ['get','post'],'/usuarios/crear', 'UsuariosController::crear');
 $routes->match( ['get','post'],'/usuarios/editar', 'UsuariosController::editar');
 $routes->match( ['get','post'],'/usuarios/actualizar', 'UsuariosController::actualizar');
 $routes->match( ['get','post'],'/usuarios/eliminar', 'UsuariosController::delete');
-$routes->get('/usuarios/grafica', 'UsuariosController::grafica');
-$routes->get('/usuarios/grafica2', 'UsuariosController::grafica2');
 
-$routes->get('/usuarios/grafica3', 'UsuariosController::grafica3');
-
-$routes->get('/usuarios/graficas', 'UsuariosController::graficas');
-
-$routes->match( ['get','post'],'/usuarios/exportar', 'UsuariosController::exportar');
 
 //PROVINCIAS
 $routes->get('/provincias', 'ProvinciasController::index');
@@ -77,3 +70,15 @@ $routes->match( ['get','post'],'/modelos/crear', 'ModelosController::crear');
 $routes->match( ['get','post'],'/modelos/editar', 'ModelosController::editar');
 $routes->match( ['get','post'],'/modelos/actualizar', 'ModelosController::actualizar');
 $routes->match( ['get','post'],'/modelos/eliminar', 'ModelosController::delete');
+
+//TALLERES
+$routes->get('/talleres', 'talleresController::index');
+$routes->get('/talleres/nuevo', 'talleresController::nuevo');
+$routes->match( ['get','post'],'/talleres/crear', 'talleresController::crear');
+$routes->match( ['get','post'],'/talleres/editar', 'talleresController::editar');
+$routes->match( ['get','post'],'/talleres/actualizar', 'talleresController::actualizar');
+$routes->match( ['get','post'],'/talleres/eliminar', 'talleresController::delete');
+$routes->match( ['get','post'],'/talleres/exportar', 'talleresController::exportar');
+$routes->get('/talleres/graficas','talleresController::graficas');
+
+

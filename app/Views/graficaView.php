@@ -4,10 +4,8 @@
     <div class="col-12">
  <?= validation_list_errors();
 $errors=validation_errors();
-        
-    
-?>
-    
+            
+?>    
        <div class="col-lg-6 mt-2">
     <div class="demo-box">
     <h4 class="header-title">Stacked Bar chart</h4>
@@ -23,23 +21,25 @@ $errors=validation_errors();
 </div>
 <?php include("templates/parte2.php");?>
 
+<!-- <canvas id="id1"></canvas> -->
 <script>
-
-$(function () {
-    var css_id = "#ordered-bars-chart";
-    var data = [
-        {label: 'Num. usuarios', data: [<?= $datalabel;?>]},
-    
-    ];
-    var options = {
-        series: {stack: 0,
-                 lines: {show: false, steps: false },
-                 bars: {show: true, barWidth: 0.9, align: 'center',},},
-        xaxis: {ticks: [<?= $ticks;?>]},
-    };
-
-    $.plot($(css_id), data, options);
-});
-
-
+    var ctx = document.getElementById('id1').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [<?= $xValues ?>],
+            datasets: [{
+                label: 'Número de Talleres por Distribuidor',
+                data: [<?= $yValues ?>],
+                backgroundColor: [<?= $colores ?>]
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 </script>

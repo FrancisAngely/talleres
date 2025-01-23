@@ -535,18 +535,6 @@
                         <ul class="submenu">
                             <li><a href="<?php echo baseUrl(); ?>/usuarios">Listado</a></li>
                             <li><a href="<?php echo baseUrl(); ?>/usuarios/nuevo">Nuevo</a></li>
-                            <li><a href="<?php echo baseUrl(); ?>/usuarios/grafica">Gráfica</a></li>
-
-                        </ul>
-                    </li>
-
-                    <li class="has-submenu">
-                        <a href="#"> <i class="mdi mdi-flip-horizontal"></i>Usos
-                        </a>
-                        <ul class="submenu">
-                            <li><a href="<?php echo baseUrl(); ?>/inmuebles_usos">Listado</a></li>
-                            <li><a href="<?php echo baseUrl(); ?>/inmuebles_usos/nuevo">Nuevo</a></li>
-
                         </ul>
                     </li>
 
@@ -554,8 +542,8 @@
                         <a href="#"> <i class="mdi mdi-flip-horizontal"></i>Localidades
                         </a>
                         <ul class="submenu">
-                        <li><a href="<?php echo baseUrl(); ?>/localidades">Listado</a></li>
-                        <li><a href="<?php echo baseUrl(); ?>/localidades/nuevo">Nuevo</a></li>
+                            <li><a href="<?php echo baseUrl(); ?>/localidades">Listado</a></li>
+                            <li><a href="<?php echo baseUrl(); ?>/localidades/nuevo">Nuevo</a></li>
 
                         </ul>
                     </li>
@@ -563,8 +551,8 @@
                     <li class="has-submenu">
                         <a href="#"> <i class="mdi mdi-flip-horizontal"></i>Distribuidores</a>
                         <ul class="submenu">
-                        <li><a href="<?php echo baseUrl(); ?>/distribuidores">Listado</a></li>
-                        <li><a href="<?php echo baseUrl(); ?>/distribuidores/nuevo">Nuevo</a></li>
+                            <li><a href="<?php echo baseUrl(); ?>/distribuidores">Listado</a></li>
+                            <li><a href="<?php echo baseUrl(); ?>/distribuidores/nuevo">Nuevo</a></li>
 
                         </ul>
                     </li>
@@ -572,13 +560,22 @@
                     <li class="has-submenu">
                         <a href="#"> <i class="mdi mdi-flip-horizontal"></i>Modelos</a>
                         <ul class="submenu">
-                        <li><a href="<?php echo baseUrl(); ?>/modelos">Listado</a></li>
-                        <li><a href="<?php echo baseUrl(); ?>/modelos/nuevo">Nuevo</a></li>
+                            <li><a href="<?php echo baseUrl(); ?>/modelos">Listado</a></li>
+                            <li><a href="<?php echo baseUrl(); ?>/modelos/nuevo">Nuevo</a></li>
 
                         </ul>
                     </li>
 
+                    <li class="has-submenu">
+                        <a href="#"> <i class="mdi mdi-flip-horizontal"></i>Talleres</a>
+                        <ul class="submenu">
+                            <li><a href="<?php echo baseUrl(); ?>/talleres">Listado</a></li>
+                            <li><a href="<?php echo baseUrl(); ?>/talleres/nuevo">Nuevo</a></li>
+                            <li><a href="<?php echo baseUrl(); ?>/talleres/graficas">Graficas</a></li>
+                            <li><a href="<?php echo baseUrl(); ?>/talleres/exportar">Exportar</a></li>
 
+                        </ul>
+                    </li>
                 </ul>
                 <!-- End navigation menu -->
 
