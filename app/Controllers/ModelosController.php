@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
+use CodeIgniter\Files\File;
 use App\Models\ModelosModel;
 
 
@@ -29,126 +30,167 @@ class ModelosController extends BaseController
 
     public function crear()
     {
+        // Reglas de validación
         $rules = [
             'modelo' => [
                 'rules' => 'required|is_unique[modelos.modelo]',
                 'errors' => [
                     'required' => 'Debes introducir un modelo',
-                    'is_unique' => 'La modelo ya existe',
-
+                    'is_unique' => 'El modelo ya existe',
                 ]
             ],
             'descripcion' => [
                 'rules' => 'required|is_unique[modelos.descripcion]',
                 'errors' => [
-                    'required' => 'Debes introducir una descripcion',
-                    'is_unique' => 'La descripcion ya existe',
-
+                    'required' => 'Debes introducir una descripción',
+                    'is_unique' => 'La descripción ya existe',
                 ]
             ],
             'precio' => [
-                'rules' => 'required|is_unique[modelos.precio]',
+                'rules' => 'required|decimal',
                 'errors' => [
                     'required' => 'Debes introducir un precio',
-                    'is_unique' => 'El precio ya existe',
-
+                    'decimal' => 'El precio debe ser un número válido',
                 ]
             ],
             'foto' => [
-                'rules' => 'required|is_unique[modelos.foto]',
+                'rules' => 'is_image[foto]|max_dims[foto,1024,768]',
                 'errors' => [
-                    'required' => 'Debes introducir una foto',
-                    'is_unique' => 'La foto ya existe',
+                    'is_image' => 'El archivo debe ser una imagen',
+                    'max_dims' => 'Las dimensiones de la imagen no deben superar los 1024x768 píxeles',
                 ]
-            ]
+            ],
         ];
 
-        $datos = $this->request->getPost(array_keys($rules));
+        // Manejar el archivo subido
+        $file = $this->request->getFile('foto');
 
-        if (!$this->validateData($datos, $rules)) {
-            return redirect()->back()->withInput();
+        // Verifica si se recibió el archivo
+        if (!$file) {
+            dd('No se recibió el archivo. Asegúrate de que el campo <input> tenga el nombre correcto.');
+            return 'No se recibió ningún archivo.';
         }
 
-        $model = new ModelosModel();
-        $modelo = $this->request->getvar('modelo');
-        $descripcion = $this->request->getvar('descripcion');
-        $precio = $this->request->getvar('precio');
-        $foto = $this->request->getvar('foto');
+        // Verifica si es válido
+        if (!$file->isValid()) {
+            dd('El archivo no es válido: ' . $file->getErrorString());
+            return 'El archivo no es válido: ' . $file->getErrorString() . ' (' . $file->getError() . ')';
+        }
 
-        $newData = [
-            'modelo' => $modelo,
-            'descripcion' => $descripcion,
-            'precio' => $precio,
-            'foto' => $foto
+        $fileName = $file->getRandomName(); // Genera un nombre único
+        $uploadPath = WRITEPATH . 'uploads/';
+        echo  $uploadPath;
+
+        if ($file->isValid() && !$file->hasMoved()) {
+            $file->move($uploadPath, $fileName);
+        } else {
+            return redirect()->back()->with('error', 'Error al subir la imagen.');
+        }
+
+        // Guardar los datos en la base de datos
+        $model = new ModelosModel();
+        $data = [
+            'modelo' => $this->request->getPost('modelo'),
+            'descripcion' => $this->request->getPost('descripcion'),
+            'precio' => $this->request->getPost('precio'),
+            'foto' => $fileName, // Guarda el nombre del archivo en la base de datos
         ];
 
-        $model->save($newData);
-
+        $model->save($data);
 
         return redirect()->to('/modelos');
     }
+
 
     public function editar()
     {
         $model = new ModelosModel();
-        $id = $this->request->getvar('id');
-        $data["datos"] = $model->where('id', $id)->first();
+        $id = $this->request->getVar('id');
 
+        // Obtiene los datos del modelo
+        $data['datos'] = $model->where('id', $id)->first();
 
+        if (!$data['datos']) {
+            return redirect()->to('/modelos')->with('error', 'Modelo no encontrado');
+        }
+
+        // Carga la vista con los datos
         return view('modelosEditView', $data);
     }
 
+
     public function actualizar()
     {
+        // Reglas de validación
         $rules = [
-            'modelo' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Debes introducir un modelo',
-
-                ]
-            ],
-            'descripcion' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Debes introducir una descripcion',
-
-                ]
-            ],
-            'precio' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Debes introducir un precio',
-
-                ]
-            ],
-            'foto' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Debes introducir una foto',
-                ]
-            ]
+            'modelo' => 'required',
+            'descripcion' => 'required',
+            'precio' => 'required|decimal',
+            'foto' => 'permit_empty|is_image[foto]|max_dims[foto,1024,768]', // Permitimos que foto sea opcional
         ];
 
-        $datos = $this->request->getPost(array_keys($rules));
-
-        if (!$this->validateData($datos, $rules)) {
-            return redirect()->back()->withInput();
+        // Validar los datos del formulario
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('error', 'Hubo un error con la validación.');
         }
 
+        // Obtener los datos enviados por el formulario
+        $id = $this->request->getVar('id');
+        $modelo = $this->request->getVar('modelo');
+        $descripcion = $this->request->getVar('descripcion');
+        $precio = $this->request->getVar('precio');
+
+        // Recuperar los datos existentes en la base de datos
         $model = new ModelosModel();
-        $id = $this->request->getvar('id');
-        $modelo = $this->request->getvar('modelo');
-        $descripcion = $this->request->getvar('descripcion');
-        $precio = $this->request->getvar('precio');
-        $foto = $this->request->getvar('foto');
+        $datosExistentes = $model->where('id', $id)->first();
 
-        $model->where('id', $id)
-            ->set(['modelo' => $modelo, 'descripcion' => $descripcion, 'precio' => $precio, 'foto' => $foto, 'updated_at' => date("Y-m-d h:i:s")])
-            ->update();
+        if (!$datosExistentes) {
+            return redirect()->back()->with('error', 'El modelo no existe.');
+        }
 
-        return redirect()->to('/modelos');
+        // Preparar los datos para la actualización
+        $data = [
+            'modelo' => $modelo,
+            'descripcion' => $descripcion,
+            'precio' => $precio,
+            'updated_at' => date("Y-m-d h:i:s"),
+        ];
+
+        // Manejo de la foto
+        $file = $this->request->getFile('foto');
+
+        if ($file && $file->isValid()) {
+            // Generar un nombre único para la imagen
+            $fileName = $file->getRandomName();
+
+            // Eliminar la foto anterior si existe
+            if (!empty($datosExistentes['foto'])) {
+                $oldFile = WRITEPATH . 'uploads/' . $datosExistentes['foto'];
+                if (file_exists($oldFile)) {
+                    try {
+                        unlink($oldFile);
+                    } catch (\Exception $e) {
+                        log_message('error', 'Error eliminando el archivo: ' . $e->getMessage());
+                    }
+                }
+            }
+
+            // Mover el archivo al directorio de sub¡idas
+            $file->move(WRITEPATH . 'uploads/', $fileName); // Cambiado a 'uploads/'
+
+            // Agregar la foto al array de datos
+            $data['foto'] = $fileName;
+        } else {
+            // Mantener la foto existente
+            $data['foto'] = $datosExistentes['foto'];
+        }
+
+        // Actualizar los datos en la base de datos
+        $model->update($id, $data);
+
+        return redirect()->to('/modelos')->with('success', 'Modelo actualizado correctamente.');
     }
+
 
 
     public function delete()

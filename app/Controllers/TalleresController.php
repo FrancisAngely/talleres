@@ -28,27 +28,30 @@ class TalleresController extends BaseController
 
     public function nuevo()
     {
-        $options=array();
-        $options['']="--Select--";
-        
-        $modelprovincia=new ProvinciaModel();
-        $provincias=$modelprovincia->findAll();
-        foreach($provincias as $provincia){
-            $options[$provincia["id"]]=$provincia["provincia"];
-        }
-        $data["optionsProvincias"]=$options;
+        $options = array();
+        $options[''] = "--Select--";
 
-        $options1=array();
-        $options1['']="--Select--";
-        
-        $modellocalidades=new LocalidadModel();
-        $localidades=$modellocalidades->findAll();
-        foreach($localidades as $localidad){
-            $options1[$localidad["id"]]=$localidad["localidad"];
+        $modelprovincia = new ProvinciaModel();
+        $provincias = $modelprovincia->findAll();
+        foreach ($provincias as $provincia) {
+            if ($provincia["activo"] == 1) {
+                $options[$provincia["id"]] = $provincia["provincia"];
+            }
         }
-        $data["optionsLocalidades"]=$options1;
+        $data["optionsProvincias"] = $options;
 
-        return view('talleresNewView',$data);
+        $options1 = array();
+        $options1[''] = "--Select--";
+
+        $modellocalidades = new LocalidadModel();
+        $localidades = $modellocalidades->findAll();
+        foreach ($localidades as $localidad) {
+            if ($localidad["activo"] == 1)
+                $options1[$localidad["id"]] = $localidad["localidad"];
+        }
+        $data["optionsLocalidades"] = $options1;
+
+        return view('talleresNewView', $data);
     }
 
     public function crear()
@@ -63,18 +66,16 @@ class TalleresController extends BaseController
                 ]
             ],
             'provincias' => [
-                'rules' => 'required|is_unique[talleres.provincias]',
+                'rules' => 'required',
                 'errors' => [
                     'required' => 'Debes introducir una provincia',
-                    'is_unique' => 'La provincia ya existe',
 
                 ]
             ],
             'id_localidades' => [
-                'rules' => 'required|is_unique[talleres.id_localidades]',
+                'rules' => 'required',
                 'errors' => [
                     'required' => 'Debes introducir un id de la localidad',
-                    'is_unique' => 'El id de la localidad ya existe',
 
                 ]
             ],
@@ -95,7 +96,7 @@ class TalleresController extends BaseController
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Debes introducir un codigo postal',
-                  
+
                 ]
             ]
         ];
@@ -199,7 +200,7 @@ class TalleresController extends BaseController
         $cp = $this->request->getvar('cp');
 
         $talleres->where('id', $id)
-            ->set(['id_distribuidores' => $id_distribuidores, 'provincias' => $provincias, 'id_localidades' => $id_localidades, 'direccion' => $direccion, 'numero' => $numero, 'cp' => $cp,'updated_at' => date("Y-m-d h:i:s")])
+            ->set(['id_distribuidores' => $id_distribuidores, 'provincias' => $provincias, 'id_localidades' => $id_localidades, 'direccion' => $direccion, 'numero' => $numero, 'cp' => $cp, 'updated_at' => date("Y-m-d h:i:s")])
             ->update();
 
         return redirect()->to('/talleres');
@@ -220,30 +221,32 @@ class TalleresController extends BaseController
         $model = new DistribuidoresModel();
         $talleres = $model->datosgrafica();
         $data["datos"] = $talleres;
-    
         $xValues = array();
         $yValues = array();
         $colores = '"red", "green", "blue", "orange", "brown"';
-    
+
         if (count($talleres) > 0) {
             foreach ($talleres as $taller) {
                 array_push($yValues, $taller["numTalleres"]);
                 array_push($xValues, "'" . $taller["distribuidor"] . "'");
             }
         }
-    
+
         $yValues = implode(",", $yValues);
         $xValues = implode(",", $xValues);
-    
+
         $data["yValues"] = $yValues;
         $data["xValues"] = $xValues;
         $data["colores"] = $colores;
         $data["idGrafBarra"] = "id1";
-        $dataC["grafica1"] = view('graf_barraView', $data);
-    
-        return view('graficasView', $dataC);
+        $data["datalabel"] = "label";
 
-        //https://www.blackbox.ai/share/b113a6a5-c733-4f79-b9e3-d48a2d3d0d1b
+        $datalabel = array();
+        $ticks = array();
+        $datalabel = implode(",", $datalabel);
+        $ticks = implode(",", $ticks);
+        $data["datalabel"] = $datalabel;
+        $data["ticks"] = $ticks;
+        return view('graficaView', $data);
     }
-    
 }

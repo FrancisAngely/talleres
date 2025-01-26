@@ -17,34 +17,42 @@
                 </li>
 
                 <li class="dropdown d-none d-lg-block">
-                    <a class="nav-link dropdown-toggle mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="<?php echo baseUrl(); ?>/templates/assets/images/flags/us.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">English <i class="mdi mdi-chevron-down"></i> </span>
+                    <a class="nav-link dropdown-toggle mr-0" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="false" aria-expanded="false">
+                        <img src="<?php echo baseUrl(); ?>/templates/assets/images/flags/us.jpg" alt="user-image"
+                            class="mr-2" height="12"> <span class="align-middle">English <i
+                                class="mdi mdi-chevron-down"></i> </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <img src="<?php echo baseUrl(); ?>/templates/assets/images/flags/germany.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">German</span>
+                            <img src="<?php echo baseUrl(); ?>/templates/assets/images/flags/germany.jpg"
+                                alt="user-image" class="mr-2" height="12"> <span class="align-middle">German</span>
                         </a>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <img src="<?php echo baseUrl(); ?>/templates/assets/images/flags/italy.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Italian</span>
+                            <img src="<?php echo baseUrl(); ?>/templates/assets/images/flags/italy.jpg" alt="user-image"
+                                class="mr-2" height="12"> <span class="align-middle">Italian</span>
                         </a>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <img src="<?php echo baseUrl(); ?>/templates/assets/images/flags/spain.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Spanish</span>
+                            <img src="<?php echo baseUrl(); ?>/templates/assets/images/flags/spain.jpg" alt="user-image"
+                                class="mr-2" height="12"> <span class="align-middle">Spanish</span>
                         </a>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <img src="<?php echo baseUrl(); ?>/templates/assets/images/flags/russia.jpg" alt="user-image" class="mr-2" height="12"> <span class="align-middle">Russian</span>
+                            <img src="<?php echo baseUrl(); ?>/templates/assets/images/flags/russia.jpg"
+                                alt="user-image" class="mr-2" height="12"> <span class="align-middle">Russian</span>
                         </a>
                     </div>
                 </li>
 
                 <li class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#"
+                        role="button" aria-haspopup="false" aria-expanded="false">
                         <i class="mdi mdi-bell noti-icon"></i>
                         <span class="badge badge-success rounded-circle noti-icon-badge">4</span>
                         <div class="noti-dot">
@@ -120,7 +128,8 @@
                         </div>
 
                         <!-- All-->
-                        <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                        <a href="javascript:void(0);"
+                            class="dropdown-item text-center text-primary notify-item notify-all">
                             See all Notification
                             <i class="fi-arrow-right"></i>
                         </a>
@@ -129,7 +138,8 @@
                 </li>
 
                 <li class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle  waves-effect waves-light" data-toggle="dropdown" href="#"
+                        role="button" aria-haspopup="false" aria-expanded="false">
                         <i class="mdi mdi-email noti-icon"></i>
                         <span class="badge badge-danger rounded-circle noti-icon-badge">8</span>
                     </a>
@@ -151,35 +161,45 @@
                             <div class="inbox-widget">
                                 <a href="#">
                                     <div class="inbox-item">
-                                        <div class="inbox-item-img"><img src="<?php echo baseUrl(); ?>/templates/assets/images/users/avatar-1.jpg" class="rounded-circle" alt=""></div>
+                                        <div class="inbox-item-img"><img
+                                                src="<?php echo baseUrl(); ?>/templates/assets/images/users/avatar-1.jpg"
+                                                class="rounded-circle" alt=""></div>
                                         <p class="inbox-item-author">Chadengle</p>
                                         <p class="inbox-item-text text-truncate">Hey! there I'm available...</p>
                                     </div>
                                 </a>
                                 <a href="#">
                                     <div class="inbox-item">
-                                        <div class="inbox-item-img"><img src="<?php echo baseUrl(); ?>/templates/assets/images/users/avatar-2.jpg" class="rounded-circle" alt=""></div>
+                                        <div class="inbox-item-img"><img
+                                                src="<?php echo baseUrl(); ?>/templates/assets/images/users/avatar-2.jpg"
+                                                class="rounded-circle" alt=""></div>
                                         <p class="inbox-item-author">Tomaslau</p>
                                         <p class="inbox-item-text text-truncate">I've finished it! See you so...</p>
                                     </div>
                                 </a>
                                 <a href="#">
                                     <div class="inbox-item">
-                                        <div class="inbox-item-img"><img src="<?php echo baseUrl(); ?>/templates/assets/images/users/avatar-3.jpg" class="rounded-circle" alt=""></div>
+                                        <div class="inbox-item-img"><img
+                                                src="<?php echo baseUrl(); ?>/templates/assets/images/users/avatar-3.jpg"
+                                                class="rounded-circle" alt=""></div>
                                         <p class="inbox-item-author">Stillnotdavid</p>
                                         <p class="inbox-item-text text-truncate">This theme is awesome!</p>
                                     </div>
                                 </a>
                                 <a href="#">
                                     <div class="inbox-item">
-                                        <div class="inbox-item-img"><img src="<?php echo baseUrl(); ?>/templates/assets/images/users/avatar-4.jpg" class="rounded-circle" alt=""></div>
+                                        <div class="inbox-item-img"><img
+                                                src="<?php echo baseUrl(); ?>/templates/assets/images/users/avatar-4.jpg"
+                                                class="rounded-circle" alt=""></div>
                                         <p class="inbox-item-author">Kurafire</p>
                                         <p class="inbox-item-text text-truncate">Nice to meet you</p>
                                     </div>
                                 </a>
                                 <a href="#">
                                     <div class="inbox-item">
-                                        <div class="inbox-item-img"><img src="<?php echo baseUrl(); ?>/templates/assets/images/users/avatar-5.jpg" class="rounded-circle" alt=""></div>
+                                        <div class="inbox-item-img"><img
+                                                src="<?php echo baseUrl(); ?>/templates/assets/images/users/avatar-5.jpg"
+                                                class="rounded-circle" alt=""></div>
                                         <p class="inbox-item-author">Shahedk</p>
                                         <p class="inbox-item-text text-truncate">Hey! there I'm available...</p>
 
@@ -190,7 +210,8 @@
                         </div>
 
                         <!-- All-->
-                        <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                        <a href="javascript:void(0);"
+                            class="dropdown-item text-center text-primary notify-item notify-all">
                             See all Messages
                             <i class="fi-arrow-right"></i>
                         </a>
@@ -201,7 +222,8 @@
                 </li>
 
                 <li class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown"
+                        href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
@@ -553,6 +575,9 @@
                         <ul class="submenu">
                             <li><a href="<?php echo baseUrl(); ?>/distribuidores">Listado</a></li>
                             <li><a href="<?php echo baseUrl(); ?>/distribuidores/nuevo">Nuevo</a></li>
+                            <li><a href="<?php echo baseUrl(); ?>/distribuidores/exportar">Exportar</a></li>
+                            <li><a href="<?php echo baseUrl(); ?>/distribuidores/imprimir">Imprimir</a></li>
+
 
                         </ul>
                     </li>
@@ -572,8 +597,6 @@
                             <li><a href="<?php echo baseUrl(); ?>/talleres">Listado</a></li>
                             <li><a href="<?php echo baseUrl(); ?>/talleres/nuevo">Nuevo</a></li>
                             <li><a href="<?php echo baseUrl(); ?>/talleres/graficas">Graficas</a></li>
-                            <li><a href="<?php echo baseUrl(); ?>/talleres/exportar">Exportar</a></li>
-
                         </ul>
                     </li>
                 </ul>

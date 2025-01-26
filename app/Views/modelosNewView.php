@@ -6,6 +6,8 @@
         ?>
         <!-- SELECT `id`, `modelo`, `descripcion`, `precio`, `foto`, `created_at`, `updated_at` FROM `modelos` WHERE 1-->
         <form action="<?php echo baseUrl(); ?>/modelos/crear" method="post" enctype="multipart/form-data" id="form1">
+            <!-- <?= form_open_multipart('/modelos/crear') ?> -->
+
 
             <div class="mb-3">
                 <label for="modelo" class="form-label">Modelo</label>

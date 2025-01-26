@@ -6,14 +6,16 @@
         ?>
         <!-- SELECT `id`, `modelo`, `descripcion`, `precio`, `foto`, `created_at`, `updated_at` FROM `modelos` WHERE 1-->
 
-        <form action="<?php echo baseUrl(); ?>/modelos/actualizar" method="post" enctype="multipart/form-data" id="form1">
+        <form action="<?php echo baseUrl(); ?>/modelos/actualizar" method="post" enctype="multipart/form-data"
+            id="form1">
 
             <input type="hidden" class="form-control" id="id" name="id" value="<?= $datos["id"]; ?>">
 
             <div class="mb-3">
                 <label for="modelo" class="form-label">Modelo</label>
                 <span id="modelo_error" class="text-danger"></span>
-                <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Modelo" value="<?= $datos["modelo"]; ?>">
+                <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Modelo"
+                    value="<?= $datos["modelo"]; ?>">
             </div>
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripcion</label>
@@ -24,14 +26,24 @@
             <div class="mb-3">
                 <label for="precio" class="form-label">precio</label>
                 <span id="precio_error" class="text-danger"></span>
-                <input type="number" class="form-control" id="precio" name="precio" placeholder="precio" value="<?= $datos["precio"]; ?>">
+                <input type="number" class="form-control" id="precio" name="precio" placeholder="precio"
+                    value="<?= $datos["precio"]; ?>">
             </div>
 
             <div class="mb-3">
                 <label for="foto" class="form-label">Foto</label>
-                <span id="foto_error" class="text-danger"></span>
-                <input type="file" class="form-control" id="foto" name="foto" placeholder="Foto" value="<?= $datos["foto"]; ?>">
+                <input type="file" class="form-control" id="foto" name="foto">
+
+                <!-- Mostrar la foto actual si existe -->
+                <?php if (!empty($datos['foto'])): ?>
+                    <p><strong>Foto actual:</strong></p>
+                    <img src="<?php echo WRITEPATH . '/uploads' . esc($datos['foto']) ?>" alt="Foto actual"
+                        style="max-width: 200px; max-height: 200px;">
+                <?php else: ?>
+                    <p>No hay foto disponible.</p>
+                <?php endif; ?>
             </div>
+
 
             <div class="mb-3">
                 <input type="submit" class="form-control" value="Aceptar" id="btnform11">
