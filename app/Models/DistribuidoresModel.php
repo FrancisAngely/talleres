@@ -48,16 +48,16 @@ class DistribuidoresModel extends Model
                      ->join('talleres', 'distribuidores.id = talleres.id_distribuidores', 'LEFT')
                      ->select(
                             'distribuidores.id AS distribuidor_id,
-                            distribuidores.razon_social,
-                            distribuidores.nombre,
-                            distribuidores.apellidos,
-                            distribuidores.cif_nif_nie,
-                            talleres.id AS taller_id,
-                            talleres.provincias,
-                            talleres.id_localidades,
-                            talleres.direccion,
-                            talleres.numero,
-                            talleres.cp'
+             distribuidores.razon_social,
+             distribuidores.nombre,
+             distribuidores.apellidos,
+             distribuidores.cif_nif_nie,
+             talleres.id AS taller_id,
+             talleres.provincias,
+             talleres.id_localidades,
+             talleres.direccion,
+             talleres.numero,
+             talleres.cp'
                      )
                      ->findAll();
 

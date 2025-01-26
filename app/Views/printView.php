@@ -7,85 +7,81 @@ include("files_dompdf/config.php");
 <head>
     <?php include("files_dompdf/style.php"); ?>
     <style>
-    /* Estilo para la ficha */
-    .ficha {
-        margin-top: 10pt;
-        margin-left: 10pt;
-        width: 100%;
-        border-collapse: collapse;
-        table-layout: fixed;
-        /* Establece ancho fijo para las columnas */
-    }
-
-    .ficha th,
-    .ficha td {
-        font-size: 12pt;
-        /* Reducir tamaño de fuente */
-        padding: 6pt;
-        /* Reducir espacio interno de las celdas */
-        border: 1px solid #d2d2d2;
-        text-align: left;
-        word-wrap: break-word;
-        white-space: nowrap;
-        /* Evitar que las palabras se partan */
-    }
-
-    .ficha th {
-        background-color: #d2d2d2;
-        font-weight: 300;
-    }
-
-    /* Estilo para el título de la página */
-    h1 {
-        font-size: 20pt;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    /* Estilo para la tabla principal */
-    .paginaA4 {
-        width: 100%;
-        margin: 0 auto;
-        border: none;
-        page-break-before: always;
-        /* Evitar mezcla con el pie */
-    }
-
-    .contenido {
-        padding: 10px;
-        overflow: hidden;
-        /* Evitar que el contenido se desborde */
-    }
-
-    .contenedor {
-        page-break-inside: avoid;
-        /* Evitar que el contenedor se divida entre páginas */
-    }
-
-    /* Estilos para el pie de página */
-    .footer {
-        page-break-before: always;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        font-size: 12pt;
-        padding: 10pt 0;
-    }
-
-    /* Ajuste para pantallas pequeñas (en dispositivos móviles) */
-    @media screen and (max-width: 768px) {
+        /* Estilo para la ficha */
         .ficha {
-            font-size: 10pt;
-            /* Reducir aún más el tamaño de fuente */
+            margin-top: 10pt;
+            margin-left: 10pt;
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            /* Para asegurarnos de que la tabla no se desborde */
         }
 
         .ficha th,
         .ficha td {
-            padding: 4pt;
-            /* Reducir el padding para ahorrar espacio */
+            font-size: 16pt;
+            padding: 8pt;
+            border: 1px solid #d2d2d2;
+            text-align: left;
+            word-wrap: break-word;
+            /* Para que el contenido largo no se desborde */
         }
-    }
+
+        .ficha th {
+            background-color: #d2d2d2;
+            font-weight: 300;
+        }
+
+        /* Estilo para el título de la página */
+        h1 {
+            font-size: 24pt;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo para la tabla principal */
+        .paginaA4 {
+            width: 100%;
+            margin: 0 auto;
+            border: none;
+            page-break-before: always;
+            /* Evita que el contenido se mezcle con el pie */
+        }
+
+        .contenido {
+            padding: 10px;
+            overflow: hidden;
+            /* Evita que el contenido se desborde */
+        }
+
+        .contenedor {
+            page-break-inside: avoid;
+            /* Asegura que el contenedor no se divida en páginas */
+        }
+
+        /* Estilos para el pie de página */
+        .footer {
+            page-break-before: always;
+            /* Asegura que el pie se coloque al final de la página */
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 12pt;
+            padding: 10pt 0;
+        }
+
+        /* Adaptabilidad para pantallas pequeñas */
+        @media screen and (max-width: 768px) {
+            .ficha {
+                font-size: 14pt;
+            }
+
+            .ficha th,
+            .ficha td {
+                padding: 8pt;
+            }
+        }
     </style>
 </head>
 
@@ -114,18 +110,18 @@ include("files_dompdf/config.php");
                     </thead>
                     <tbody>
                         <?php foreach ($distribuidoresConTalleres as $row): ?>
-                        <tr>
-                            <td><?= $row['distribuidor_id'] ?></td>
-                            <td><?= $row['razon_social'] ?></td>
-                            <td><?= $row['nombre'] ?></td>
-                            <td><?= $row['apellidos'] ?></td>
-                            <td><?= $row['cif_nif_nie'] ?></td>
-                            <td><?= $row['provincias'] ?></td>
-                            <td><?= $row['id_localidades'] ?></td>
-                            <td><?= $row['direccion'] ?></td>
-                            <td><?= $row['numero'] ?></td>
-                            <td><?= $row['cp'] ?></td>
-                        </tr>
+                            <tr>
+                                <td><?= $row['distribuidor_id'] ?></td>
+                                <td><?= $row['razon_social'] ?></td>
+                                <td><?= $row['nombre'] ?></td>
+                                <td><?= $row['apellidos'] ?></td>
+                                <td><?= $row['cif_nif_nie'] ?></td>
+                                <td><?= $row['provincias'] ?></td>
+                                <td><?= $row['id_localidades'] ?></td>
+                                <td><?= $row['direccion'] ?></td>
+                                <td><?= $row['numero'] ?></td>
+                                <td><?= $row['cp'] ?></td>
+                            </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
