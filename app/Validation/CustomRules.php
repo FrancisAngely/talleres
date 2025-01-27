@@ -6,13 +6,12 @@ class CustomRules
 {
     public function required_if_other_empty(string $value, string $otherField, array $data): bool
     {
-        // Check if the other field is not empty
+        // Si el otro campo está vacío, el campo actual debe tener un valor
         if (!empty($data[$otherField])) {
-            // If the other field is not empty, the current field must not be empty
             return empty($value);
         }
 
-        // If the other field is not empty, the current field is not required
+        // Si el otro campo no está vacío, el campo actual no es obligatorio
         return true;
     }
 }

@@ -78,8 +78,8 @@ class ModelosController extends BaseController
         }
 
         $fileName = $file->getRandomName(); // Genera un nombre único
-        $uploadPath = WRITEPATH . 'uploads/';
-        echo  $uploadPath;
+        $uploadPath = FCPATH . 'uploads/';
+        //echo  $uploadPath;
 
         if ($file->isValid() && !$file->hasMoved()) {
             $file->move($uploadPath, $fileName);
@@ -165,7 +165,7 @@ class ModelosController extends BaseController
 
             // Eliminar la foto anterior si existe
             if (!empty($datosExistentes['foto'])) {
-                $oldFile = WRITEPATH . 'uploads/' . $datosExistentes['foto'];
+                $oldFile = FCPATH . 'uploads/' . $datosExistentes['foto'];
                 if (file_exists($oldFile)) {
                     try {
                         unlink($oldFile);
@@ -176,7 +176,7 @@ class ModelosController extends BaseController
             }
 
             // Mover el archivo al directorio de sub¡idas
-            $file->move(WRITEPATH . 'uploads/', $fileName); // Cambiado a 'uploads/'
+            $file->move(FCPATH . 'uploads/', $fileName); // Cambiado a 'uploads/'
 
             // Agregar la foto al array de datos
             $data['foto'] = $fileName;

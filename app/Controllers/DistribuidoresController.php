@@ -7,14 +7,12 @@ use App\Models\DistribuidoresModel;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use CodeIgniter\Files\File;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
 class DistribuidoresController extends BaseController
 {
-
     protected $helpers = ['form'];
 
     public function index()
@@ -27,102 +25,83 @@ class DistribuidoresController extends BaseController
 
     public function nuevo()
     {
-
         return view('distribuidoresNewView');
     }
 
+    // Función para validar si un campo es requerido dependiendo de otro
+    // public function required_if_other_empty(string $value, string $otherField, array $data): bool
+    // {
+    //     // Si el otro campo está vacío, el campo actual debe tener un valor
+    //     if (empty($data[$otherField])) {
+    //         return !empty($value);
+    //     }
+
+    //     // Si el otro campo no está vacío, el campo actual no es obligatorio
+    //     return true;
+    // }
 
     public function crear()
     {
-
+        // Reglas de validación
         $rules = [
             'razon_social' => [
-                'rules' => 'is_unique[distribuidores.razon_social]|required_if_other_empty[distribuidores.nombre]|required_if_other_empty[distribuidores.apellido]',
+                'rules' => 'required_if_other_empty[nombre,apellidos]',
                 'errors' => [
-                    'is_unique' => 'La razon social ya existe',
-                    'required_if_other_empty' => 'La razón social es requerido si nombre y apellido esta vacia.',
+                    'required_if_other_empty' => 'La razón social es obligatoria si nombre y apellidos están vacíos.',
                 ]
             ],
             'nombre' => [
-                'rules' => 'is_unique[distribuidores.nombre]|required_if_other_empty[distribuidores.razon_social]',
+                'rules' => 'required_if_other_empty[razon_social]',
                 'errors' => [
-                    'is_unique' => 'El nombre ya existe',
-                    'required_if_other_empty' => 'El Nombre es requerido si la razón social esta vacia.',
+                    'required_if_other_empty' => 'El nombre es obligatorio si la razón social está vacía.',
                 ]
             ],
             'apellidos' => [
-                'rules' => 'is_unique[distribuidores.apellidos]|required_if_other_empty[distribuidores.razon_social]',
+                'rules' => 'required_if_other_empty[razon_social]',
                 'errors' => [
-                    'is_unique' => 'Los apellidos ya existe',
-                    'required_if_other_empty' => 'El Apellido es requerido si la razón social esta vacia.',
-
+                    'required_if_other_empty' => 'Los apellidos son obligatorios si la razón social está vacía.',
                 ]
             ],
             'cif_nif_nie' => [
                 'rules' => 'required|is_unique[distribuidores.cif_nif_nie]',
                 'errors' => [
-                    'required' => 'Debes introducir una CIF, NIF o NIE',
-                    'is_unique' => 'El CIF, NIF o NIE ya existe',
+                    'required' => 'Debes introducir una CIF, NIF o NIE.',
+                    'is_unique' => 'El CIF, NIF o NIE ya existe.',
                 ]
-            ],
-
-            'documento' => [
-                'rules' => 'mime_in[documento,application/pdf]|ext_in[documento,pdf]',
-                'errors' => [
-                    'mime_in' => 'No pdf',
-                    'ext_in' => 'No pdf',
-                ],
             ]
         ];
 
         $datos = $this->request->getPost(array_keys($rules));
 
+        // Validar datos usando las reglas
         if (!$this->validateData($datos, $rules)) {
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
         }
 
         $model = new DistribuidoresModel();
-        $razon_social = $this->request->getvar('razon_social');
-
-        $nombre = $this->request->getvar('nombre');
-
-        $apellidos = $this->request->getvar('apellidos');
-
-        $cif_nif_nie = $this->request->getvar('cif_nif_nie');
+        $razon_social = $this->request->getVar('razon_social');
+        $nombre = $this->request->getVar('nombre');
+        $apellidos = $this->request->getVar('apellidos');
+        $cif_nif_nie = $this->request->getVar('cif_nif_nie');
 
         $newData = [
             'razon_social' => $razon_social,
             'nombre' => $nombre,
             'apellidos' => $apellidos,
             'cif_nif_nie' => $cif_nif_nie,
-            'documento' => '',
-            'created_at' => date("Y-m-d h:i:s"),
-            'updated_at' => date("Y-m-d h:i:s")
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s")
         ];
 
+        // Guardar datos iniciales
         if ($model->save($newData)) {
-            if ($this->request->getFile('documento') != "") {
-                $uso_id = $model->getInsertID();
-
-                $documento = $this->request->getFile('documento');
-                $ext = $documento->guessExtension();
-
-                $nameDocumentoFile = "Uso_" . $uso_id . "." . $ext;
-                $documento->move(ROOTPATH . 'public/uploads', $nameDocumentoFile);
-
-                $filepath = 'public/uploads/' . $nameDocumentoFile;
-
-                $model->where('id', $uso_id)
-                    ->set(['documento' => $filepath])
-                    ->update();
-
-                // $model->save($newData);
-
-
-                return redirect()->to('/distribuidores');
-            }
+            return redirect()->to('/distribuidores')->with('success', 'Distribuidor creado correctamente.');
         }
+
+        return redirect()->back()->with('error', 'No se pudo crear el distribuidor. Intente de nuevo.');
     }
+
+
 
     public function editar()
     {
@@ -241,7 +220,7 @@ class DistribuidoresController extends BaseController
         $dompdf = new Dompdf($options);
 
         // Obtener datos de distribuidores y talleres
-        $model = new DistribuidoresModel(); // Ajusta el nombre del modelo según tu proyecto
+        $model = new DistribuidoresModel();
         $data['distribuidoresConTalleres'] = $model->listaDistribuidoresConTalleres();
 
         // Renderizar la vista con los datos
@@ -249,8 +228,7 @@ class DistribuidoresController extends BaseController
 
         // Generar el PDF
         $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'landscape'); // Configurar tamaño y orientación del papel
-        $dompdf->render();
+        $dompdf->setPaper('A4', 'landscape');
 
         // Descargar o mostrar el PDF
         $dompdf->stream("distribuidores_talleres.pdf", ['Attachment' => false]);

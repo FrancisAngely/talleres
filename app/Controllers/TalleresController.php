@@ -138,6 +138,29 @@ class TalleresController extends BaseController
         $id = $this->request->getvar('id');
         $data["datos"] = $talleres->where('id', $id)->first();
 
+        $options = array();
+        $options[''] = "--Select--";
+
+        $modelprovincia = new ProvinciaModel();
+        $provincias = $modelprovincia->findAll();
+        foreach ($provincias as $provincia) {
+            if ($provincia["activo"] == 1) {
+                $options[$provincia["id"]] = $provincia["provincia"];
+            }
+        }
+        $data["optionsProvincias"] = $options;
+
+        $options1 = array();
+        $options1[''] = "--Select--";
+
+        $modellocalidades = new LocalidadModel();
+        $localidades = $modellocalidades->findAll();
+        foreach ($localidades as $localidad) {
+            if ($localidad["activo"] == 1)
+                $options1[$localidad["id"]] = $localidad["localidad"];
+        }
+        $data["optionsLocalidades"] = $options1;
+
 
         return view('talleresEditView', $data);
     }

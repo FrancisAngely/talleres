@@ -10,7 +10,8 @@
             <div class="mb-3">
                 <label for="id_distribuidores" class="form-label">Id distribuidores</label>
                 <span id="id_distribuidores_error" class="text-danger"></span>
-                <input type="text" class="form-control" id="id_distribuidores" name="id_distribuidores" placeholder="Id distribuidores">
+                <input type="text" class="form-control" id="id_distribuidores" name="id_distribuidores"
+                    placeholder="Id distribuidores">
             </div>
 
             <div class="mb-3">

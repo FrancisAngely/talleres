@@ -26,10 +26,13 @@
                             <td><?php echo $r["descripcion"]; ?></td>
                             <td><?php echo $r["precio"]; ?></td>
                             <td><img src="<?php echo baseUrl(); ?>/uploads/<?php echo $r["foto"]; ?>" alt="" width="100"></td>
-                           
-                            <td><a href="<?php echo baseUrl(); ?>/modelos/editar?id=<?php echo $r["id"]; ?>"><i class="fa-solid fa-pen-to-square fa-2x"></i></a>
+
+                            <td><a href="<?php echo baseUrl(); ?>/modelos/editar?id=<?php echo $r["id"]; ?>"><i
+                                        class="fa-solid fa-pen-to-square fa-2x"></i></a>
                                 &nbsp;&nbsp;
-                                <a href="<?php echo baseUrl(); ?>/modelos/eliminar?id=<?php echo $r["id"]; ?>" data-id="<?php echo $r["id"]; ?>" class="borrar"><i class="fa-solid fa-trash text-danger"></i>
+                                <a href="<?php echo baseUrl(); ?>/modelos/eliminar?id=<?php echo $r["id"]; ?>"
+                                    data-id="<?php echo $r["id"]; ?>" class="borrar"><i
+                                        class="fa-solid fa-trash text-danger"></i>
                                     <a href="modulo_localidades_print.php?id=<?php echo $r["id"]; ?>"><i
                                             class="fa-solid fa-print"></i></a>
                                     &nbsp;&nbsp;

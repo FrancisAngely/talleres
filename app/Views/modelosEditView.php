@@ -37,8 +37,9 @@
                 <!-- Mostrar la foto actual si existe -->
                 <?php if (!empty($datos['foto'])): ?>
                     <p><strong>Foto actual:</strong></p>
-                    <img src="<?php echo WRITEPATH . '/uploads' . esc($datos['foto']) ?>" alt="Foto actual"
-                        style="max-width: 200px; max-height: 200px;">
+                    <div class="container-fluid">
+                        <img src="<?= base_url('uploads/' . $datos['foto']) ?>" alt="" width="100">
+                    </div>
                 <?php else: ?>
                     <p>No hay foto disponible.</p>
                 <?php endif; ?>

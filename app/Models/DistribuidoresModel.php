@@ -13,13 +13,19 @@ class DistribuidoresModel extends Model
 
        public function datosgrafica()
        {
-              $sql = "SELECT distribuidores.id, CONCAT(distribuidores.nombre,distribuidores.apellidos) AS distribuidor,COUNT(distribuidores.id)as numTalleres
-                     FROM distribuidores
-                     JOIN talleres ON distribuidores.id = talleres.id_distribuidores
-                     GROUP BY distribuidores.id";
+              $sql = "
+              SELECT distribuidores.id, 
+              CASE 
+              WHEN TRIM(distribuidores.razon_social) != '' THEN distribuidores.razon_social
+              ELSE CONCAT_WS(' ', TRIM(distribuidores.nombre), TRIM(distribuidores.apellidos))
+              END AS distribuidor,
+              COUNT(talleres.id) AS numTalleres
+              FROM distribuidores
+              LEFT JOIN talleres ON distribuidores.id = talleres.id_distribuidores
+              GROUP BY distribuidores.id;";
 
               $query = $this->query($sql);
-              $datos = array();
+              $datos = [];
 
               if ($query->getResult()) {
                      $datos = $query->getResultArray();
@@ -27,6 +33,8 @@ class DistribuidoresModel extends Model
 
               return $datos;
        }
+
+
        public function listaDistribuidor()
        {
               $distribuidores = $this

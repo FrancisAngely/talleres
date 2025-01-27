@@ -6,6 +6,7 @@
         <table class="table datatable" id="tabla">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Razon Social</th>
                     <th>Nombre</th>
                     <th>Apellidos</th>
@@ -20,14 +21,18 @@
                     foreach ($distribuidores as $r) {
                 ?>
                         <tr>
+                            <td><?php echo $r["id"]; ?></td>
                             <td><?php echo $r["razon_social"]; ?></td>
                             <td><?php echo $r["nombre"]; ?></td>
                             <td><?php echo $r["apellidos"]; ?></td>
                             <td><?php echo $r["cif_nif_nie"]; ?></td>
 
-                            <td><a href="<?php echo baseUrl(); ?>/distribuidores/editar?id=<?php echo $r["id"]; ?>"><i class="fa-solid fa-pen-to-square fa-2x"></i></a>
+                            <td><a href="<?php echo baseUrl(); ?>/distribuidores/editar?id=<?php echo $r["id"]; ?>"><i
+                                        class="fa-solid fa-pen-to-square fa-2x"></i></a>
                                 &nbsp;&nbsp;
-                                <a href="<?php echo baseUrl(); ?>/distribuidores/eliminar?id=<?php echo $r["id"]; ?>" data-id="<?php echo $r["id"]; ?>" class="borrar"><i class="fa-solid fa-trash text-danger"></i>
+                                <a href="<?php echo baseUrl(); ?>/distribuidores/eliminar?id=<?php echo $r["id"]; ?>"
+                                    data-id="<?php echo $r["id"]; ?>" class="borrar"><i
+                                        class="fa-solid fa-trash text-danger"></i>
                                     <a href="modulo_localidades_print.php?id=<?php echo $r["id"]; ?>"><i
                                             class="fa-solid fa-print"></i></a>
                                     &nbsp;&nbsp;
