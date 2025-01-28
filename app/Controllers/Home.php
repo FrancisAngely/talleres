@@ -104,7 +104,7 @@ class Home extends BaseController
         $password = $this->request->getVar('password');
 
         echo $id . "_" . $usuario . "-" . $password;
-        //return view('formulario');
+        return view('formulario');
         return redirect()->to("/inicio");
     }
 }

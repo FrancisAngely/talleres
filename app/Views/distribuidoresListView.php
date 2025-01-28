@@ -33,9 +33,11 @@
                                 <a href="<?php echo baseUrl(); ?>/distribuidores/eliminar?id=<?php echo $r["id"]; ?>"
                                     data-id="<?php echo $r["id"]; ?>" class="borrar"><i
                                         class="fa-solid fa-trash text-danger"></i>
-                                    <a href="modulo_localidades_print.php?id=<?php echo $r["id"]; ?>"><i
-                                            class="fa-solid fa-print"></i></a>
-                                    &nbsp;&nbsp;
+
+                            <td><a href="<?php echo baseUrl(); ?>/distribuidores/imprimir?id=<?php echo $r["id"]; ?>"><i
+                                        class="fa-solid fa-print"></i></a>
+                                &nbsp;&nbsp;
+
                                 </a>
                             </td>
                         </tr>

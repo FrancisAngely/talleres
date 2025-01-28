@@ -6,7 +6,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::inicio', ['filter' => 'authGuard']);
-$routes->get('/inicio', 'Home::index', ['filter' => 'authGuard']);
+$routes->get('/inicio', 'Home::inicio', ['filter' => 'authGuard']);
 $routes->match(['get', 'post'], '/inicioGet', 'Home::inicioGet');
 $routes->get('/formulario', 'Home::formulario', ['filter' => 'authGuard']);
 
@@ -66,8 +66,6 @@ $routes->match(['get', 'post'], '/distribuidores/eliminar', 'DistribuidoresContr
 $routes->match(['get', 'post'], '/distribuidores/exportar', 'DistribuidoresController::exportar');
 $routes->match(['get', 'post'], '/distribuidores/imprimir', 'DistribuidoresController::imprimir');
 
-
-
 //MODELOS
 $routes->get('/modelos', 'ModelosController::index');
 $routes->get('/modelos/nuevo', 'ModelosController::nuevo');
@@ -76,7 +74,6 @@ $routes->match(['get', 'post'], '/modelos/editar', 'ModelosController::editar');
 $routes->match(['get', 'post'], '/modelos/actualizar', 'ModelosController::actualizar');
 $routes->match(['get', 'post'], '/modelos/eliminar', 'ModelosController::delete');
 
-
 //TALLERES
 $routes->get('/talleres', 'talleresController::index');
 $routes->get('/talleres/nuevo', 'talleresController::nuevo');
@@ -84,4 +81,5 @@ $routes->match(['get', 'post'], '/talleres/crear', 'talleresController::crear');
 $routes->match(['get', 'post'], '/talleres/editar', 'talleresController::editar');
 $routes->match(['get', 'post'], '/talleres/actualizar', 'talleresController::actualizar');
 $routes->match(['get', 'post'], '/talleres/eliminar', 'talleresController::delete');
+$routes->match(['get', 'post'], '/talleres/imprimir', 'talleresController::imprimir');
 $routes->get('/talleres/graficas', 'talleresController::graficas');

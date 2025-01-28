@@ -8,11 +8,6 @@ use App\Models\ProvinciaModel;
 use App\Models\LocalidadModel;
 use App\Models\DistribuidoresModel;
 
-
-
-
-
-
 class TalleresController extends BaseController
 {
 
@@ -58,11 +53,9 @@ class TalleresController extends BaseController
     {
         $rules = [
             'id_distribuidores' => [
-                'rules' => 'required|is_unique[talleres.id_distribuidores]',
+                'rules' => 'required',
                 'errors' => [
                     'required' => 'Debes introducir un id de distribuidores',
-                    'is_unique' => 'El id de distribuidor ya existe',
-
                 ]
             ],
             'provincias' => [

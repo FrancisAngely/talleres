@@ -576,9 +576,6 @@
                             <li><a href="<?php echo baseUrl(); ?>/distribuidores">Listado</a></li>
                             <li><a href="<?php echo baseUrl(); ?>/distribuidores/nuevo">Nuevo</a></li>
                             <li><a href="<?php echo baseUrl(); ?>/distribuidores/exportar">Exportar</a></li>
-                            <li><a href="<?php echo baseUrl(); ?>/distribuidores/imprimir">Imprimir</a></li>
-
-
                         </ul>
                     </li>
 

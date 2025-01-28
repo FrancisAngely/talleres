@@ -7,6 +7,7 @@ use App\Models\DistribuidoresModel;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use CodeIgniter\Files\File;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -28,17 +29,16 @@ class DistribuidoresController extends BaseController
         return view('distribuidoresNewView');
     }
 
-    // Función para validar si un campo es requerido dependiendo de otro
-    // public function required_if_other_empty(string $value, string $otherField, array $data): bool
-    // {
-    //     // Si el otro campo está vacío, el campo actual debe tener un valor
-    //     if (empty($data[$otherField])) {
-    //         return !empty($value);
-    //     }
+    public function required_if_other_empty(string $value, string $otherField, array $data): bool
+    {
+        // Si el otro campo está vacío, el campo actual debe tener un valor
+        if (!empty($data[$otherField])) {
+            return empty($value);
+        }
 
-    //     // Si el otro campo no está vacío, el campo actual no es obligatorio
-    //     return true;
-    // }
+        // Si el otro campo no está vacío, el campo actual no es obligatorio
+        return true;
+    }
 
     public function crear()
     {
@@ -221,7 +221,7 @@ class DistribuidoresController extends BaseController
 
         // Obtener datos de distribuidores y talleres
         $model = new DistribuidoresModel();
-        $data['distribuidoresConTalleres'] = $model->listaDistribuidoresConTalleres();
+        $data['distribuidores'] = $model->listaDistribuidor();
 
         // Renderizar la vista con los datos
         $html = view('printView', $data);
@@ -229,8 +229,9 @@ class DistribuidoresController extends BaseController
         // Generar el PDF
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
 
         // Descargar o mostrar el PDF
-        $dompdf->stream("distribuidores_talleres.pdf", ['Attachment' => false]);
+        $dompdf->stream("distribuidores.pdf", ['Attachment' => false]);
     }
 }

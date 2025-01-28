@@ -1,136 +1,56 @@
-<?php
-include("files_dompdf/config.php");
-?>
-<!DOCTYPE html>
-<html lang="es">
+ <?php
 
-<head>
-    <?php include("files_dompdf/style.php"); ?>
-    <style>
-        /* Estilo para la ficha */
-        .ficha {
-            margin-top: 10pt;
-            margin-left: 10pt;
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-            /* Para asegurarnos de que la tabla no se desborde */
-        }
+    include("files_dompdf/config.php");
 
-        .ficha th,
-        .ficha td {
-            font-size: 16pt;
-            padding: 8pt;
-            border: 1px solid #d2d2d2;
-            text-align: left;
-            word-wrap: break-word;
-            /* Para que el contenido largo no se desborde */
-        }
+    ?>
+ <!DOCTYPE html>
+ <html lang="es">
 
-        .ficha th {
-            background-color: #d2d2d2;
-            font-weight: 300;
-        }
+ <head>
+     <?php include("files_dompdf/style.php"); ?>
+     <style>
+         .ficha {
+             margin-top: 10pt;
+             margin-left: 10pt;
 
-        /* Estilo para el título de la página */
-        h1 {
-            font-size: 24pt;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+         }
 
-        /* Estilo para la tabla principal */
-        .paginaA4 {
-            width: 100%;
-            margin: 0 auto;
-            border: none;
-            page-break-before: always;
-            /* Evita que el contenido se mezcle con el pie */
-        }
+         .ficha th {
+             font-size: 18pt;
+             padding: 10pt;
+             font-weight: 300;
+             background: #d2d2d2;
+         }
 
-        .contenido {
-            padding: 10px;
-            overflow: hidden;
-            /* Evita que el contenido se desborde */
-        }
+         .ficha td {
+             font-size: 18pt;
+             padding: 10pt;
+             border: 1px solid #d2d2d2;
+         }
+     </style>
+ </head>
 
-        .contenedor {
-            page-break-inside: avoid;
-            /* Asegura que el contenedor no se divida en páginas */
-        }
+ <body>
 
-        /* Estilos para el pie de página */
-        .footer {
-            page-break-before: always;
-            /* Asegura que el pie se coloque al final de la página */
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 12pt;
-            padding: 10pt 0;
-        }
+     <table class="paginaA4" cellspacing=0 cellpadding=0>
+         <?php include("files_dompdf/cabecera.php"); ?>
 
-        /* Adaptabilidad para pantallas pequeñas */
-        @media screen and (max-width: 768px) {
-            .ficha {
-                font-size: 14pt;
-            }
+         <tr class="contenido">
+             <td class="contenedor">
+                 <!-- ficha -->
+                 <table class="ficha" cellspacing=0 cellpadding=0>
+                     <tr>
+                         <td><?= $texto; ?></td>
+                     </tr>
+                 </table>
 
-            .ficha th,
-            .ficha td {
-                padding: 8pt;
-            }
-        }
-    </style>
-</head>
 
-<body>
+             </td>
+         </tr>
+         <?php include("files_dompdf/pie.php"); ?>
+     </table>
 
-    <table class="paginaA4" cellspacing="0" cellpadding="0">
-        <?php include("files_dompdf/cabecera.php"); ?>
 
-        <tr class="contenido">
-            <td class="contenedor">
-                <!-- ficha -->
-                <table class="ficha" cellspacing="0" cellpadding="0">
-                    <thead>
-                        <tr>
-                            <th>ID Distribuidor</th>
-                            <th>Razón Social</th>
-                            <th>Nombre</th>
-                            <th>Apellidos</th>
-                            <th>CIF/NIF/NIE</th>
-                            <th>Provincia</th>
-                            <th>Localidad</th>
-                            <th>Dirección</th>
-                            <th>Número</th>
-                            <th>Código Postal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($distribuidoresConTalleres as $row): ?>
-                            <tr>
-                                <td><?= $row['distribuidor_id'] ?></td>
-                                <td><?= $row['razon_social'] ?></td>
-                                <td><?= $row['nombre'] ?></td>
-                                <td><?= $row['apellidos'] ?></td>
-                                <td><?= $row['cif_nif_nie'] ?></td>
-                                <td><?= $row['provincias'] ?></td>
-                                <td><?= $row['id_localidades'] ?></td>
-                                <td><?= $row['direccion'] ?></td>
-                                <td><?= $row['numero'] ?></td>
-                                <td><?= $row['cp'] ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
+ </body>
 
-        <?php include("files_dompdf/pie.php"); ?>
-    </table>
-
-</body>
-
-</html>
+ </html>

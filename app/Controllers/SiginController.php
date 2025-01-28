@@ -66,7 +66,7 @@ class SiginController extends BaseController
                 ];
                 $session = session();
                 $session->set($ses_data);
-                return redirect()->to('/home');
+                return redirect()->to('/inicio');
             }
         } catch (\Exception $e) {
             echo $e->getMessage();

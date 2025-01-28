@@ -43,7 +43,7 @@
 
                             ?>
 
-                            <form method="post" action="<?php echo baseUrl(); ?>SiginController/loginAuth">
+                            <form method="post" action="<?php echo baseUrl(); ?>/SiginController/loginAuth">
 
                                 <div class="form-group">
                                     <input class="form-control" type="text" id="username" placeholder="Username"
