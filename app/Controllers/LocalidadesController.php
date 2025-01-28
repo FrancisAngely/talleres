@@ -14,6 +14,9 @@ class LocalidadesController extends BaseController
 
     public function index()
     {
+        if (!isAdmin()) {
+            return redirect()->to('/');
+        }
         $model = new LocalidadModel();
         $data['localidades'] = $model->findAll();
 
@@ -153,8 +156,8 @@ class LocalidadesController extends BaseController
         $localidad = $this->request->getvar('localidad');
 
         $model->where('id', $id)
-        ->set(['id_provincias'=>$id_provincias,'cmun'=>$cmun,'dc'=>$dc,'localidad'=>$localidad,'updated_at'=>date("Y-m-d h:i:s")])
-        ->update();
+            ->set(['id_provincias' => $id_provincias, 'cmun' => $cmun, 'dc' => $dc, 'localidad' => $localidad, 'updated_at' => date("Y-m-d h:i:s")])
+            ->update();
 
         return redirect()->to('/localidades');
     }

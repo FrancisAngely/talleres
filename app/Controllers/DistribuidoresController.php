@@ -219,19 +219,19 @@ class DistribuidoresController extends BaseController
         $options->set('isRemoteEnabled', true);
         $dompdf = new Dompdf($options);
 
-        // Obtener datos de distribuidores y talleres
-        $model = new DistribuidoresModel();
+        // Obtener datos de distribuidores
+        $model = new DistribuidoresModel(); // Ajusta el nombre del modelo según tu proyecto
         $data['distribuidores'] = $model->listaDistribuidor();
 
         // Renderizar la vista con los datos
         $html = view('printView', $data);
-
+        echo $html;
         // Generar el PDF
         $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->setPaper('A4', 'landscape'); // Configurar tamaño y orientación del papel
         $dompdf->render();
 
         // Descargar o mostrar el PDF
-        $dompdf->stream("distribuidores.pdf", ['Attachment' => false]);
+        $dompdf->stream("Distribuidores.pdf", ['Attachment' => false]);
     }
 }

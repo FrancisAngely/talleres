@@ -3,7 +3,9 @@
 namespace Config;
 
 use Kint\Parser\ConstructablePluginInterface;
-use Kint\Renderer\AbstractRenderer;
+use Kint\Renderer\Renderer;
+use Kint\Renderer\RichRenderer;
+
 use Kint\Renderer\Rich\TabPluginInterface;
 use Kint\Renderer\Rich\ValuePluginInterface;
 
@@ -41,7 +43,7 @@ class Kint
     */
     public string $richTheme = 'aante-light.css';
     public bool $richFolder  = false;
-    public int $richSort     = AbstractRenderer::SORT_FULL;
+    public int $richSort     = Renderer::SORT_FULL;
 
     /**
      * @var array<string, class-string<ValuePluginInterface>>|null

@@ -1,56 +1,84 @@
- <?php
+<?php
 
-    include("files_dompdf/config.php");
+include("files_dompdf/config.php");
 
-    ?>
- <!DOCTYPE html>
- <html lang="es">
+?>
+<!DOCTYPE html>
+<html lang="es">
 
- <head>
-     <?php include("files_dompdf/style.php"); ?>
-     <style>
-         .ficha {
-             margin-top: 10pt;
-             margin-left: 10pt;
+<head>
+    <?php include("files_dompdf/style.php"); ?>
+</head>
 
-         }
+<body>
 
-         .ficha th {
-             font-size: 18pt;
-             padding: 10pt;
-             font-weight: 300;
-             background: #d2d2d2;
-         }
+    <table class="paginaA4" cellspacing=0 cellpadding=0>
+        <?php include("files_dompdf/cabecera.php"); ?>
 
-         .ficha td {
-             font-size: 18pt;
-             padding: 10pt;
-             border: 1px solid #d2d2d2;
-         }
-     </style>
- </head>
+        <tr class="contenido">
+            <td class="contenedor">
+                <!-- ficha -->
+                <table class="ficha" cellspacing=0 cellpadding=0>
+                    <tr>
+                        <td>
+                            <div class="invoice">
+                                <div class="invoice-header">
+                                    <h1>Ficha de Factura</h1>
+                                    <p>Documento generado automáticamente</p>
+                                </div>
 
- <body>
+                                <div class="invoice-details">
+                                    <table>
 
-     <table class="paginaA4" cellspacing=0 cellpadding=0>
-         <?php include("files_dompdf/cabecera.php"); ?>
+                                        <tr>
+                                            <th>Campo</th>
+                                            <br>
+                                            <th>Detalle</th>
+                                        </tr>
+                                        <h1>Talleres</h1>
+                                        <tr>
+                                            <td>Id Distribuidores</td>
+                                            <td><?= $talleres["id_distribuidores"]; ?></td>
+                                        </tr>
+                                        <hr>
+                                        <tr>
+                                            <td>Provincias</td>
+                                            <td><?= $talleres["provincias"]; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Id localidades</td>
+                                            <td><?= $talleres["id_localidades"]; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Direccion</td>
+                                            <td><?= $talleres["direccion"]; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Numero</td>
+                                            <td><?= $talleres["numero"]; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>CP</td>
+                                            <td><?= $talleres["cp"]; ?></td>
+                                        </tr>
+                                    </table>
+                                </div>
 
-         <tr class="contenido">
-             <td class="contenedor">
-                 <!-- ficha -->
-                 <table class="ficha" cellspacing=0 cellpadding=0>
-                     <tr>
-                         <td><?= $texto; ?></td>
-                     </tr>
-                 </table>
+                                <div class="footer">
+                                    <p>&copy; 2025 - Todos los derechos reservados</p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
 
 
-             </td>
-         </tr>
-         <?php include("files_dompdf/pie.php"); ?>
-     </table>
+            </td>
+        </tr>
+        <?php include("files_dompdf/pie.php"); ?>
+    </table>
 
 
- </body>
+</body>
 
- </html>
+</html>

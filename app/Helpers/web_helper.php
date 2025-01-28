@@ -30,3 +30,10 @@ if (!function_exists('cambiarFormatoAMysql')) {
         return $lafecha;
     }
 }
+
+if (!function_exists('isAdmin')) {
+    function isAdmin()
+    {
+        return session()->get('role') === 'Administrador';
+    }
+}

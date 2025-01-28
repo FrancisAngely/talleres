@@ -8,6 +8,9 @@ use App\Models\ProvinciaModel;
 use App\Models\LocalidadModel;
 use App\Models\DistribuidoresModel;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 class TalleresController extends BaseController
 {
 
@@ -264,5 +267,58 @@ class TalleresController extends BaseController
         $data["datalabel"] = $datalabel;
         $data["ticks"] = $ticks;
         return view('graficaView', $data);
+    }
+
+    public function imprimir()
+    {
+
+        // $id = $this->request->getvar('id');
+
+        // $options = new Options();
+        // $options->set('isRemoteEnabled', true);
+        // $dompdf = new Dompdf($options);
+
+        // $talleres = new TalleresModel();
+        // $distribuidoresModel = new DistribuidoresModel();
+
+        // $data['talleres'] = $talleres->where('id', $id)->first();
+
+        // $distribuidorId = $data['talleres']['id_distribuidores'];
+        // $data['numTalleres'] = $talleres->where('id_distribuidores', $distribuidorId)->countAllResults();
+
+        // $html = view('printView1', $data);
+
+        // $dompdf->loadHtml($html);
+        // $dompdf->render();
+        // $dompdf->stream("prueba.pdf", ['Attachment' => false]);
+
+        $id = $this->request->getvar('id');
+
+        $options = new Options();
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
+
+        $talleresModel = new TalleresModel();
+        $distribuidoresModel = new DistribuidoresModel();
+
+        // Obtener información del taller
+        $data['talleres'] = $talleresModel->where('id', $id)->first();
+
+        // Obtener el número de talleres asociados al distribuidor
+        $distribuidorId = $data['talleres']['id_distribuidores'];
+        $data['numTalleres'] = $talleresModel->where('id_distribuidores', $distribuidorId)->countAllResults();
+
+        // Obtener información del distribuidor
+        $distribuidor = $distribuidoresModel->where('id', $distribuidorId)->first();
+        $data['distribuidorNombre'] = $distribuidor['nombre'];
+        $data['distribuidorApellido'] = $distribuidor['apellidos'];
+        $data['distribuidorRazonSocial'] = $distribuidor['razon_social'];
+
+
+        $html = view('printView1', $data);
+
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+        $dompdf->stream("prueba.pdf", ['Attachment' => false]);
     }
 }

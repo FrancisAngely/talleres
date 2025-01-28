@@ -36,19 +36,25 @@ class DistribuidoresModel extends Model
               return $datos;
        }
 
-       public function listaDistribuidor()
+       public function listaDistribuidoresConTalleres()
        {
-              $distribuidores = $this
+              $distribuidoresConTalleres = $this
+                     ->join('talleres', 'distribuidores.id = talleres.id_distribuidores', 'LEFT')
                      ->select(
-                            'distribuidores.id,
+                            'distribuidores.id AS distribuidor_id,
                             distribuidores.razon_social,
                             distribuidores.nombre,
                             distribuidores.apellidos,
                             distribuidores.cif_nif_nie,
-                            IFNULL(NULLIF(distribuidores.razon_social, ""), CONCAT(distribuidores.nombre, " ", distribuidores.apellidos)) as distribuidor'
+                            talleres.id AS taller_id,
+                            talleres.provincias,
+                            talleres.id_localidades,
+                            talleres.direccion,
+                            talleres.numero,
+                            talleres.cp'
                      )
                      ->findAll();
 
-              return $distribuidores;
+              return $distribuidoresConTalleres;
        }
 }
