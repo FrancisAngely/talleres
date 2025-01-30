@@ -9,16 +9,10 @@ $routes->get('/', 'Home::inicio', ['filter' => 'authGuard']);
 $routes->get('/inicio', 'Home::inicio', ['filter' => 'authGuard']);
 $routes->match(['get', 'post'], '/inicioGet', 'Home::inicioGet');
 $routes->get('/formulario', 'Home::formulario', ['filter' => 'authGuard']);
-
 $routes->match(['get', 'post'], '/verificar', 'Home::comprobar');
-
 $routes->get('image/display', 'ImageController::display');
-
-
-
 $routes->match(['get', 'post'], '/SiginController/loginAuth', 'SiginController::loginAuth');
 $routes->get('/salir', 'ProfileController::cerrar_sesion');
-
 $routes->get('/sigin', 'SiginController::index', ['filter' => 'noauthGuard']);
 
 

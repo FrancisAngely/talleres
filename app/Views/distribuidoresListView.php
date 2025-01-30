@@ -31,13 +31,11 @@
                                         class="fa-solid fa-pen-to-square fa-2x"></i></a>
                                 &nbsp;&nbsp;
                                 <a href="<?php echo baseUrl(); ?>/distribuidores/eliminar?id=<?php echo $r["id"]; ?>"
-                                    data-id="<?php echo $r["id"]; ?>" class="borrar"><i
-                                        class="fa-solid fa-trash text-danger"></i>
-
+                                    class="borrar"><i class="fa-solid fa-trash text-danger"></i>
+                                    &nbsp;&nbsp;
                             <td><a href="<?php echo baseUrl(); ?>/distribuidores/imprimir?id=<?php echo $r["id"]; ?>"><i
                                         class="fa-solid fa-print"></i></a>
                                 &nbsp;&nbsp;
-
                                 </a>
                             </td>
                         </tr>

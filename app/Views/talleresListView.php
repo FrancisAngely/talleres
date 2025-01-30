@@ -37,9 +37,8 @@
                         <a href="<?php echo baseUrl(); ?>/talleres/eliminar?id=<?php echo $r["id"]; ?>"
                             data-id="<?php echo $r["id"]; ?>" class="borrar"><i
                                 class="fa-solid fa-trash text-danger"></i>
-                    <td><a href="<?php echo baseUrl(); ?>/talleres/imprimir?id=<?php echo $r["id"]; ?>"><i
-                                class="fa-solid fa-print"></i></a>
-                        &nbsp;&nbsp;
+
+                            &nbsp;&nbsp;
                         </a>
                     </td>
                 </tr>

@@ -8,61 +8,61 @@ include("files_dompdf/config.php");
     <?php include("files_dompdf/style.php"); ?>
     <title>Ficha de Distribuidor</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
 
-        .ficha {
-            width: 80%;
-            margin: 20px auto;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
+    .ficha {
+        width: 80%;
+        margin: 20px auto;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
 
-        .invoice-header {
-            background-color: #007bff;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
+    .invoice-header {
+        background-color: rgb(85, 89, 92);
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+    }
 
-        .invoice-header h1 {
-            margin: 0;
-        }
+    .invoice-header h1 {
+        margin: 0;
+    }
 
-        .invoice-section {
-            margin-bottom: 20px;
-        }
+    .invoice-section {
+        margin-bottom: 20px;
+    }
 
-        .invoice-section h2 {
-            color: #007bff;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 5px;
-        }
+    .invoice-section h2 {
+        color: rgb(49, 51, 53);
+        border-bottom: 2px solidrgb(56, 58, 60);
+        padding-bottom: 5px;
+    }
 
-        .invoice-details {
-            display: flex;
-            flex-wrap: wrap;
-        }
+    .invoice-details {
+        display: flex;
+        flex-wrap: wrap;
+    }
 
-        .invoice-details .detail {
-            width: 50%;
-            padding: 10px;
-            box-sizing: border-box;
-        }
+    .invoice-details .detail {
+        width: 50%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
 
-        .invoice-details .detail label {
-            font-weight: bold;
-            display: block;
-        }
+    .invoice-details .detail label {
+        font-weight: bold;
+        display: block;
+    }
 
-        .invoice-details .detail p {
-            margin: 5px 0 0 0;
-        }
+    .invoice-details .detail p {
+        margin: 5px 0 0 0;
+    }
     </style>
 </head>
 
@@ -74,7 +74,7 @@ include("files_dompdf/config.php");
         </div>
 
         <div class="invoice-section">
-            <h2>Distribuidor</h2>
+            <h2><u>Distribuidor</u></h2>
             <div class="invoice-details">
                 <div class="detail">
                     <label>Id Distribuidor</label>
@@ -96,32 +96,36 @@ include("files_dompdf/config.php");
         </div>
 
         <div class="invoice-section">
-            <h2>Talleres</h2>
+            <h2><u>Talleres</u></h2>
             <div class="invoice-details">
                 <div class="detail">
                     <label>Número de Talleres</label>
                     <p><?= $numTalleres; ?></p>
                 </div>
+                <?php foreach ($todosTalleres as $taller): ?>
                 <div class="detail">
                     <label>Provincias</label>
-                    <p><?= $talleres["provincias"]; ?></p>
+                    <p><?= $taller["provincias"]; ?></p>
                 </div>
                 <div class="detail">
                     <label>Id localidades</label>
-                    <p><?= $talleres["id_localidades"]; ?></p>
+                    <p><?= $taller["id_localidades"]; ?></p>
                 </div>
                 <div class="detail">
                     <label>Direccion</label>
-                    <p><?= $talleres["direccion"]; ?></p>
+                    <p><?= $taller["direccion"]; ?></p>
                 </div>
                 <div class="detail">
                     <label>Numero</label>
-                    <p><?= $talleres["numero"]; ?></p>
+                    <p><?= $taller["numero"]; ?></p>
                 </div>
                 <div class="detail">
                     <label>CP</label>
-                    <p><?= $talleres["cp"]; ?></p>
+                    <p><?= $taller["cp"]; ?></p>
                 </div>
+                <hr>
+                <br>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>

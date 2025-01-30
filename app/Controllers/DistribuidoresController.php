@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use App\Models\DistribuidoresModel;
+use App\Models\TalleresModel;
+
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -214,24 +216,58 @@ class DistribuidoresController extends BaseController
 
     public function imprimir()
     {
-        // Configuración de Dompdf
+
+        // $id = $this->request->getvar('id');
+
+        // $options = new Options();
+        // $options->set('isRemoteEnabled', true);
+        // $dompdf = new Dompdf($options);
+
+        // $talleres = new TalleresModel();
+        // $distribuidoresModel = new DistribuidoresModel();
+
+        // $data['talleres'] = $talleres->where('id', $id)->first();
+
+        // $distribuidorId = $data['talleres']['id_distribuidores'];
+        // $data['numTalleres'] = $talleres->where('id_distribuidores', $distribuidorId)->countAllResults();
+
+        // $html = view('printView1', $data);
+
+        // $dompdf->loadHtml($html);
+        // $dompdf->render();
+        // $dompdf->stream("prueba.pdf", ['Attachment' => false]);
+
+        $id = $this->request->getvar('id');
+
         $options = new Options();
         $options->set('isRemoteEnabled', true);
         $dompdf = new Dompdf($options);
 
-        // Obtener datos de distribuidores
-        $model = new DistribuidoresModel(); // Ajusta el nombre del modelo según tu proyecto
-        $data['distribuidores'] = $model->listaDistribuidor();
+        $talleresModel = new TalleresModel();
+        $distribuidoresModel = new DistribuidoresModel();
 
-        // Renderizar la vista con los datos
-        $html = view('printView', $data);
-        echo $html;
-        // Generar el PDF
+        // Obtener información del taller
+        $data['talleres'] = $talleresModel->where('id', $id)->first();
+
+        // Obtener el número de talleres asociados al distribuidor
+        $distribuidorId = $data['talleres']['id_distribuidores'];
+        $data['numTalleres'] = $talleresModel->where('id_distribuidores', $distribuidorId)->countAllResults();
+        $data['todosTalleres'] = $talleresModel->where('id_distribuidores', $distribuidorId)->findAll();
+        //print_r($todosTalleres);
+
+        // Obtener información del distribuidor
+        $distribuidor = $distribuidoresModel->where('id', $distribuidorId)->first();
+        //echo '<br>';
+        //print_r($distribuidores);
+        $data['distribuidorNombre'] = $distribuidor['nombre'];
+        $data['distribuidorApellido'] = $distribuidor['apellidos'];
+        $data['distribuidorRazonSocial'] = $distribuidor['razon_social'];
+
+
+        $html = view('printView1', $data);
+
         $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'landscape'); // Configurar tamaño y orientación del papel
         $dompdf->render();
-
-        // Descargar o mostrar el PDF
-        $dompdf->stream("Distribuidores.pdf", ['Attachment' => false]);
+        $dompdf->stream("prueba.pdf", ['Attachment' => false]);
     }
 }

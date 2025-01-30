@@ -43,6 +43,8 @@ class SiginController extends BaseController
 
         $username = $this->request->getvar('username');
         $password = $this->request->getvar('password');
+        $distribuidor_id = $this->request->getVar('distribuidor_id');
+
 
         try {
             $userModel = new UsuarioModel();
@@ -71,26 +73,5 @@ class SiginController extends BaseController
         } catch (\Exception $e) {
             echo $e->getMessage();
         }
-
-        //print_r($data);
-        /*if ($data) {
-            $pass = $data["password"];
-            //$authenticatePassword=password_verify($password,$pass);
-            if (md5($password) == $pass) $authenticatePassword = true;
-            else $authenticatePassword = false;
-
-            if ($authenticatePassword) {
-                $ses_data = [
-                    'id' => $data['id'],
-                    'usuario' => $data['usuario'],
-                    'email' => $data['email'],
-                    'id_roles' => $data['id_roles'],
-                    'role' => $data['role'],
-                ];
-                $session = session();
-                $session->set($ses_data);
-                return redirect()->to('/');
-            }
-        }*/
     }
 }

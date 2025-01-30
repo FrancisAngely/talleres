@@ -49,7 +49,7 @@
                                     <input class="form-control" type="text" id="username" placeholder="Username"
                                         name="username" value="<?= set_value('username'); ?>">
                                     <?php if (isset($errors['username'])) { ?>
-                                        <span class="text-danger"><?= validation_show_error('username'); ?></span>
+                                    <span class="text-danger"><?= validation_show_error('username'); ?></span>
                                     <?php } ?>
 
                                 </div>
@@ -58,9 +58,10 @@
                                     <input class="form-control" type="password" id="password" placeholder="Password"
                                         name="password" value="<?= set_value('password'); ?>">
                                     <?php if (isset($errors['password'])) { ?>
-                                        <span class="text-danger"><?= validation_show_error('password'); ?></span>
+                                    <span class="text-danger"><?= validation_show_error('password'); ?></span>
                                     <?php } ?>
                                 </div>
+
 
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox checkbox-success">
